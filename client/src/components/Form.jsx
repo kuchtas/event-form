@@ -10,7 +10,8 @@ import store from "../store";
 const Form = () => {
   const { user } = useSelector((state) => state.user);
   const [errors, setErrors] = useState({});
-  const firstRender = useRef();
+  const firstRender = useRef(true);
+
   const changeUser = (e) => {
     store.dispatch({
       type: `user/update_${e.target.name}`,
@@ -25,10 +26,38 @@ const Form = () => {
 
   useEffect(() => {
     // if there are no errors submit the form
-    if (Object.keys(errors).length === 0 && firstRender.current) {
+    if (firstRender.current) {
+      // do not submit on first render (there are no errors because there was no validation)
+      firstRender.current = false;
+      return;
+    }
+
+    console.log(errors, user);
+    if (Object.keys(errors).length === 0 && !firstRender.current) {
       console.log("Submitting form");
+      createUser();
+      getUsers();
     }
   }, [errors]);
+
+  const createUser = async () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...user }),
+    };
+    const response = await fetch("/users/add", requestOptions);
+  };
+
+  const getUsers = async () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    const response = await fetch("/users", requestOptions);
+    const responseJSON = await response.json();
+    console.log("All created users: ", responseJSON);
+  };
 
   return (
     <>
