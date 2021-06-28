@@ -4,7 +4,7 @@ const createUser = async (user) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...user }),
   };
-  return await fetch("/users/add", requestOptions);
+  return await fetch("/users", requestOptions);
 };
 
 export default createUser;

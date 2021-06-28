@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require("../models/Users");
 
 router.post(
-  "/add",
+  "/",
   [
     check("name", "Name should not be empty").isLength({
       min: 1,
