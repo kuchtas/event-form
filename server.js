@@ -1,12 +1,27 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const usersRoute = require("./routes/users");
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const port = process.env.PORT || 3003;
 
 app.use((req, res, next) => {
-  console.log(`Request_Endpoint: ${req.method} ${req.url}`);
+  console.log(`Request: ${req.method} ${req.url}`);
   next();
 });
 
-app.listen(port, () => console.log(`BACK_END_SERVICE_PORT: ${port}`));
+mongoose.connect(
+  "mongodb://localhost:27017/event_users",
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  },
+  () => console.log("Database connected")
+);
+
+app.listen(port, () => console.log(`Port: ${port}`));
+
+app.use("/users", usersRoute);
