@@ -5,7 +5,8 @@ const FormTitle = ({ title }) => {
         textAlign: "center",
         fontSize: "7vw",
         fontWeight: "900",
-        height: "10%",
+        height: "7vw",
+        lineHeight: "7vw",
         color: "#4571a8",
       }}
     >
