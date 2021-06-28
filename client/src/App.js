@@ -7,7 +7,8 @@ function App() {
   return (
     <div
       style={{
-        backgroundColor: "lightgrey",
+        background:
+          "radial-gradient(circle, rgba(66,119,143,0.76234243697479) 25%, rgba(69,113,168,1) 100%)",
         height: "100vh",
         width: "100vw",
         display: "flex",

@@ -2,8 +2,8 @@ const FormField = ({ label, type, customStyles, onChange, errors }) => {
   return (
     <div
       style={{
-        width: "90%",
-        margin: "auto",
+        width: "95%",
+        margin: "auto 0px",
         ...customStyles,
       }}
     >
@@ -27,7 +27,8 @@ const FormField = ({ label, type, customStyles, onChange, errors }) => {
           height: "30px",
           borderRadius: "10px",
           border: errors ? "1px solid red" : "1px solid grey",
-          padding: "5px 15px 5px 15px",
+          padding: "5px 0px 5px 15px",
+          // margin: "3px 3px",
         }}
         onChange={(e) => onChange(e)}
       />

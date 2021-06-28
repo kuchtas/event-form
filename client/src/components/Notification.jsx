@@ -21,9 +21,9 @@ const Notification = () => {
         left: "1vw",
         backgroundColor:
           notification.type === "success"
-            ? "#9ACD32"
+            ? "#40a829"
             : notification.type === "error"
-            ? "red"
+            ? "#A52A2A"
             : "black",
         padding: "10px 20px 10px 20px",
         borderRadius: "5px",

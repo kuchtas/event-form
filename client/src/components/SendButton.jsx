@@ -7,7 +7,7 @@ const SendButton = ({ onSubmit }) => {
         margin: "auto",
         borderRadius: "20px",
         border: "1px solid grey",
-        backgroundColor: "black",
+        backgroundColor: "#4571a8",
         color: "white",
       }}
       onClick={(e) => onSubmit(e)}
