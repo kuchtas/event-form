@@ -1,6 +1,7 @@
 import "./App.css";
 import Container from "./components/Container";
 import Form from "./components/Form";
+import Notification from "./components/Notification";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Container>
         <Form />
       </Container>
+      <Notification />
     </div>
   );
 }

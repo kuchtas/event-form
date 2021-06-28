@@ -5,15 +5,16 @@ import FormTitle from "./FormTitle";
 import SendButton from "./SendButton";
 import { useEffect, useRef, useState } from "react";
 import { validateUser } from "../formValidators";
-import { useSelector } from "react-redux";
-import store from "../store";
+import { useDispatch, useSelector } from "react-redux";
+
 const Form = () => {
   const { user } = useSelector((state) => state.user);
   const [errors, setErrors] = useState({});
   const firstRender = useRef(true);
+  const dispatch = useDispatch();
 
   const changeUser = (e) => {
-    store.dispatch({
+    dispatch({
       type: `user/update_${e.target.name}`,
       payload: e.target.value,
     });
@@ -32,7 +33,6 @@ const Form = () => {
       return;
     }
 
-    console.log(errors, user);
     if (Object.keys(errors).length === 0 && !firstRender.current) {
       console.log("Submitting form");
       createUser();
@@ -47,6 +47,17 @@ const Form = () => {
       body: JSON.stringify({ ...user }),
     };
     const response = await fetch("/users/add", requestOptions);
+    if (response.status === 200) {
+      dispatch({
+        type: "notification/show_success",
+        message: "Form submitted succesfully",
+      });
+    } else {
+      dispatch({
+        type: "notification/show_error",
+        message: "Form could not be submitted",
+      });
+    }
   };
 
   const getUsers = async () => {
