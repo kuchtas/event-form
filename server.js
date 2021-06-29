@@ -1,7 +1,7 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
 const usersRoute = require("./routes/users");
+const database = require("./database/index");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -15,15 +15,10 @@ app.use((req, res, next) => {
   next();
 });
 
-mongoose.connect(
-  "mongodb://localhost:27017/event_users",
-  {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-  },
-  () => console.log("Database connected")
-);
-
-app.listen(port, () => console.log(`Port: ${port}`));
+database.connect().then(() => {
+  app.listen(port, () => console.log(`Port: ${port}`));
+});
 
 app.use("/users", usersRoute);
+
+module.exports = app;
